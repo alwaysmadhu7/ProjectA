@@ -1,0 +1,57 @@
+package com.me.test;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class FilesUtility {
+	static List<String> arrayListFiles = new ArrayList<>();
+	// Source folder
+	static final File folder = new File("D:\\Data");
+
+	public static void main(String[] args) throws IOException {
+
+		// Get all the files with .csv
+		for (final File fileEntry : folder.listFiles()) {
+			if (!fileEntry.isDirectory()) {
+				if (fileEntry.getName().endsWith(".csv"))
+					arrayListFiles.add(fileEntry.getName());
+			}
+		}
+		// Iterate each file
+		for (String string : arrayListFiles) {
+			methodRead(string);
+			System.out.println("=============================");
+		}
+	}
+
+	private static void methodRead(String string) throws IOException {
+		long validlength = 0;
+		long invalidlength;
+		long totallength;
+
+		// Get total records
+		Path path = Paths.get(folder.getCanonicalPath() + "\\" + string);
+		try (Stream<String> lines = Files.lines(path, Charset.defaultCharset())) {
+			totallength = lines.count();
+		}
+		// Get invalid records length
+		try (Stream<String> stream = Files.lines(Paths.get(folder.getCanonicalPath() + "\\" + string))) {
+			validlength = stream.filter(line -> !(line.startsWith("User") || line.startsWith("Emp ID")
+					|| line.startsWith("EmpID") || line.startsWith("###"))).count();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		invalidlength = totallength - validlength;
+		System.out.println(totallength);
+		System.out.println(validlength);
+		System.out.println(invalidlength);
+	}
+}
