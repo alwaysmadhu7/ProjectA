@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<OrganizationRoots>
+	<OrganizationRoot action="new">
+		<OrganizationId>123</OrganizationId>
+		<OrganizationName>McKinsey</OrganizationName>
+		<OrganizationLocation>India</OrganizationLocation>
+	</OrganizationRoot>
+	<OrganizationAlias action="new">
+		<OrganizationId>909090</OrganizationId>
+		<Parent_Type_Value>USD</Parent_Type_Value>
+		<Location>Hyderabad</Location>
+	</OrganizationAlias>
+	<OrganizationAlias action="new">
+		<OrganizationId>2423423</OrganizationId>
+		<Parent_Type_Value>INR</Parent_Type_Value>
+		<Location>Bangalore</Location>
+	</OrganizationAlias>
+	<OrganizationAlias action="new">
+		<OrganizationId>34652654565</OrganizationId>
+		<Parent_Type_Value>EUR</Parent_Type_Value>
+		<Location>Pune</Location>
+	</OrganizationAlias>
+	<OrganizationAlias action="new">
+		<OrganizationId>345435346</OrganizationId>
+		<Parent_Type_Value>QAR</Parent_Type_Value>
+		<Location>Mangalore</Location>
+	</OrganizationAlias>
+	<OrganizationAlias action="new">
+		<OrganizationId>65635</OrganizationId>
+		<Parent_Type_Value>QAR</Parent_Type_Value>
+		<Location>Chennai</Location>
+	</OrganizationAlias>
+</OrganizationRoots>
