@@ -9,6 +9,7 @@ public class ParseUtil {
 
 	static int aliasCount;
 	static int orgCount;
+	static int idnCount;
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 		// Get Document Builder
@@ -17,17 +18,27 @@ public class ParseUtil {
 		Document document = builder.parse(new File("org.xml"));
 		document.getDocumentElement().normalize();
 		Element root = document.getDocumentElement();
-		NodeList nList = document.getElementsByTagName("OrganizationAlias");
+		// System.out.println("============"+document.getChildNodes().item(0));
+		NodeList nList = document.getElementsByTagName("OrganizationMarket");
 		System.out.println("============================");
 		visitChildNodes(nList);
 
-		NodeList nList2 = document.getElementsByTagName("OrganizationRoot");
+		NodeList nList2 = document.getElementsByTagName("OrganizationIdentifier");
 		visitChildNodes(nList2);
-		System.out.println(aliasCount + "========" + orgCount);
+		System.out.println(aliasCount + "========" + idnCount);
+
+		NodeList nList3 = document.getElementsByTagName("OrganizationAlias");
+		visitChildNodes(nList3);
+		System.out.println(aliasCount + "========" + idnCount);
+
+		NodeList nList4 = document.getElementsByTagName("OrganizationRoot");
+		System.out.println("============================");
+		visitChildNodes(nList4);
 
 	}
 
 	// This function is called recursively
+
 	private static void visitChildNodes(NodeList nList) {
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node node = nList.item(temp);
@@ -35,8 +46,12 @@ public class ParseUtil {
 				System.out.println("Node Name = " + node.getNodeName() + "; Value = " + node.getTextContent());
 				if (node.getNodeName().equalsIgnoreCase("OrganizationAlias")) {
 					aliasCount += 1;
-				} else if ("OrganizationRoot".equalsIgnoreCase(node.getNodeName())) {
+				}
+				if ("OrganizationRoot".equalsIgnoreCase(node.getNodeName())) {
 					orgCount += 1;
+				}
+				if ("OrganizationIdentifier".equalsIgnoreCase(node.getNodeName())) {
+					idnCount += 1;
 				}
 				// Check all attributes
 				if (node.hasAttributes()) {
